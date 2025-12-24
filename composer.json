@@ -1,0 +1,35 @@
+{
+  "name": "babak-rostami/elasticsearch-laravel",
+  "description": "Clean Elasticsearch integration for Laravel with autocomplete and fuzzy search",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Babak\\Elasticsearch\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "elasticsearch/elasticsearch": "^8.0",
+    "illuminate/support": "^10|^11|^12",
+    "illuminate/database": "^10|^11|^12"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Babak\\Elasticsearch\\ElasticsearchServiceProvider"
+      ],
+      "aliases": {
+        "Elasticsearch": "Babak\\Elasticsearch\\Facades\\Elasticsearch"
+      }
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
+  },
+  "require-dev": {
+    "orchestra/testbench": "^10.8"
+  }
+}
