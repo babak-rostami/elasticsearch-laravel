@@ -17,19 +17,13 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Babak\\Elasticsearch\\ElasticsearchServiceProvider"
-      ],
-      "aliases": {
-        "Elasticsearch": "Babak\\Elasticsearch\\Facades\\Elasticsearch"
-      }
+        "Babak\\Elasticsearch\\Providers\\ElasticsearchServiceProvider"
+      ]
     }
   },
   "config": {
     "allow-plugins": {
       "php-http/discovery": true
     }
-  },
-  "require-dev": {
-    "orchestra/testbench": "^10.8"
   }
 }

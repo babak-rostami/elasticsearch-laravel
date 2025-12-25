@@ -29,11 +29,16 @@ class ElasticsearchService
     |
     | This keeps connection logic in one place.
     */
-    public function __construct()
+    public function __construct(?Client $client = null)
+    {
+        $this->client = $client ?? $this->buildClient();
+    }
+
+    protected function buildClient(): Client
     {
         $host = Config::get('elasticsearch.host') . ':' . Config::get('elasticsearch.port');
 
-        $this->client = ClientBuilder::create()
+        return ClientBuilder::create()
             ->setHosts([$host])
             ->build();
     }
@@ -247,7 +252,7 @@ class ElasticsearchService
                     'multi_match' => [
                         'query'    => $query,
                         'fields'  => $fields,
-                        'operator' => 'and',
+                        'type'  => 'best_fields',
                     ],
                 ],
             ],
