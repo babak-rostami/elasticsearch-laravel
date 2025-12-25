@@ -23,14 +23,6 @@ Designed for:
 
 ---
 
-## Requirements
-
-- PHP ^8.1
-- Laravel ^10 | ^11 | ^12
-- Elasticsearch ^8.x
-
----
-
 ## Installation
 
 Install the package via Composer:
@@ -99,11 +91,9 @@ class Post extends Model
 
 ```
 
-## 2. Control What Gets Indexed
+## 2. Create the Elasticsearch Index
 
-Only fields returned by elasticsearchFields() are sent to Elasticsearch.
-
-## 3. Create the Elasticsearch Index
+simple Usage:
 
 ```php
 Post::createElasticIndex();
@@ -114,7 +104,53 @@ This will:
 - Create the index if it does not exist
 - Apply your model mapping and analyzers
 
-## 4. Add Data to Elasticsearch
+### Elasticsearch Index Command
+
+This package also provides an interactive Artisan command to create Elasticsearch
+indexes and optionally bulk index model data.
+
+#### Usage
+
+```bash
+php artisan elasticsearch:index
+```
+
+#### Command Flow
+
+You will be asked to enter the model name:
+
+```bash
+Which model do you want to index? (Example: Post)
+> Post
+```
+
+The command will:
+
+- Create the Elasticsearch index if it does not exist
+- Skip index creation if it already exists
+
+You will then be asked if you want to bulk index existing records:
+
+```bash
+Do you want to bulk index existing model records? (yes/no)
+```
+
+- If No → only the index will be created
+- If Yes → records will be indexed into Elasticsearch
+
+You can specify how many records should be indexed per batch:
+
+```bash
+How many records should be indexed per batch? [500]
+```
+
+What This Command Does
+
+- Safely creates Elasticsearch indexes
+- Bulk indexes data in memory-safe chunks
+- Uses Elasticsearch bulk API for high performance
+
+## 3. Data management in Elasticsearch
 
 This package provides multiple ways to keep your database models
 in sync with Elasticsearch, depending on your use case.
@@ -217,7 +253,7 @@ Best use cases:
 - Reindexing large datasets
 - Importing existing database records
 
-## 5. Search
+## 4. Search
 
 ```php
 $results = Post::searchElastic('how to use elastic search in laravel');
