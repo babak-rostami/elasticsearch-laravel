@@ -252,7 +252,7 @@ class ElasticsearchService
                     'multi_match' => [
                         'query'    => $query,
                         'fields'  => $fields,
-                        'type'  => 'best_fields',
+                        'type'  => 'cross_fields',
                     ],
                 ],
             ],
